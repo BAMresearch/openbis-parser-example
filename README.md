@@ -1,38 +1,42 @@
 # openbis-parser-example
 
-An example parser for openBIS using the bam-masterdata interface.
+Example parser for openBIS using the `bam-masterdata` parser interface.
 
-This repository is intended to be used as a template or example to be forked to generate new parsers in openBIS
-integrated with the [`openbis-upload-helper`](https://github.com/BAMresearch/openbis-upload-helper).
+This repository can be used as a template for creating new parsers that can be used with the [`openbis-upload-helper`](https://github.com/BAMresearch/openbis-upload-helper).
 
 
 ## 1. Create a new parser repository
 
-You can either [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) or [use this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) as a template.
+You can either [fork this repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) or [use it as a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
 
-Click on the button **Use this template** and choose **Create a new repository**:
+Click **Use this template** and choose **Create a new repository**:
 
 <div align="center"><img width="900" alt="use-this-template" src="https://github.com/user-attachments/assets/4a6e244b-285c-4982-a576-7dcb69aa24fa" /></div>
 
-You will be prompted to create a new repository. Choose:
-- Place to host the repository (organization or your own profile). In our case, we selected _BAMResearch_
-- Give a name.
-- Write a short description.
-- Choose _Public_ visibility.
+Choose:
+
+- the organization or profile where the repository will be created;
+- a repository name;
+- a short description;
+- the desired visibility.
+
+At BAM, parsers are typically hosted under the [`BAMresearch`](https://github.com/BAMresearch) organization.
 
 <div align="center"><img width="600" alt="create-new-template" src="https://github.com/user-attachments/assets/bf509059-b734-4634-9e32-96b2c220b257" /></div>
 
-## 2. Define your parser entry point
 
-With your new repository created, clone it locally:
+## 2. Define your parser
+
+Clone your new repository:
+
 ```bash
-git clone https://github.com/BAMresearch/<name-of-the-parser-repo>.git
+git clone https://github.com/BAMresearch/<repository-name>.git
 ```
 
-**Note**: we will be using our example with this repository to showcase the commands. Please, change the corresponding
-paths to your own repository naming conventions.
+**Note**: The examples below use this repository's current package name, openbis_parser_example. Replace it with your own repository name where needed.
 
-We have now a new folder, `openbis-parser-example`, containing the following structure:
+The repository has the following structure:
+
 ```sh
 openbis-parser-example
 ├── LICENSE
@@ -49,32 +53,50 @@ openbis-parser-example
     └── test_parser.py
 ```
 
-Below you can find an explanation of each file. You can also change the name of the package from `openbis_parser_example` to your preferred package name `<pkg-name>`.
+To create your parser:
 
-In order to create your new parser, you have to:
-1. Define a new class in `src/<pkg-name>/parser.py` instead of `OpenbisParserExample`. We recommend naming it `PkgName`.
-2. Modify `src/<pkg-name>/__init__.py` entry point variables:
+1. Define your parser class in `src/<package-name>/parser.py`. The class **must** inherit from the `bam-masterdata` parser interface, `AbstractParser`.
+2. Expose the parser in `src/<package-name>/__init__.py`:
+
 ```python
-from .parser import PkgName
+from .parser import MyParser
 
-# Add more metadata if needed
-<pkg-name>_entry_point = {
-    "name": "PkgName",
-    "description": "A new parser for masterdata.",
-    "parser_class": PkgName,
+my_parser_entry_point = {
+    "name": "My Parser",
+    "description": "Description of the parser.",
+    "parser_class": MyParser,
 }
 ```
-3. Modify the `pyproject.toml` line `[project.entry-points."bam.parsers"]` to the new entry point:
+
+3. Register the parser in `pyproject.toml`:
+
 ```sh
-<pkg-name>_entry_point = "<pkg-name>:<pkg-name>_entry_point"
+[project.entry-points."bam.parsers"]
+my_parser = "<package-name>:my_parser_entry_point"
 ```
-4. Modify all other parts in `pyproject.toml` where the `<pkg-name>` is `openbis_parser_example` to your package name.
 
-## 3. Work in your parser
+4. Update the remaining package-specific values in `pyproject.toml`, such as the project name, package paths, URLs, and `setuptools-scm` configuration.
 
-With the new structure, you can work in your parser to map data from your files into openBIS by modifying `src/<pkg-name>/parser.py` and the testing
-module `tests/test_parser.py`.
+## 3. Implement and test the parser
 
-## 4. Add new parser to `openbis-upload-helper`
+Implement the parsing logic in:
 
-Once your new parser has been developed and tested, you can add it to the registry of parsers in the [`openbis-upload-helper`](https://github.com/BAMresearch/openbis-upload-helper). We recommend you contacting the maintainers of the application with a link to your parser repository.
+```sh
+src/<package-name>/parser.py
+```
+
+Add or update tests in:
+
+```sh
+tests/test_parser.py
+```
+
+The parser should transform the source files into `bam-masterdata` objects that can later be written to openBIS.
+
+## 4. Use the parser with `openbis-upload-helper`
+
+Once the parser is developed, tested, and released as a Python package, it can be included as a dependency of the [`openbis-upload-helper`](https://github.com/BAMresearch/openbis-upload-helper).
+
+`openbis-upload-helper` automatically discovers installed parsers registered under the bam.parsers entry-point group.
+
+If the parser should be included in the distributed application, contact the `openbis-upload-helper` maintainers and provide the parser repository and released package version.
