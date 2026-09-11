@@ -1,4 +1,4 @@
-# masterdata-parser-example
+# openbis-parser-example
 
 An example parser for openBIS using the bam-masterdata interface.
 
@@ -16,7 +16,7 @@ Click on the button **Use this template** and choose **Create a new repository**
 
 You will be prompted to create a new repository. Choose:
 - Place to host the repository (organization or your own profile). In our case, we selected _BAMResearch_
-- Give a name. We named our repository _masterdata-parser-nerxiv_
+- Give a name.
 - Write a short description.
 - Choose _Public_ visibility.
 
@@ -26,20 +26,20 @@ You will be prompted to create a new repository. Choose:
 
 With your new repository created, clone it locally:
 ```bash
-git clone https://github.com/BAMresearch/masterdata-parser-example.git
+git clone https://github.com/BAMresearch/<name-of-the-parser-repo>.git
 ```
 
 **Note**: we will be using our example with this repository to showcase the commands. Please, change the corresponding
 paths to your own repository naming conventions.
 
-We have now a new folder, `masterdata-parser-example`, containing the following structure:
+We have now a new folder, `openbis-parser-example`, containing the following structure:
 ```sh
-masterdata-parser-example
+openbis-parser-example
 ├── LICENSE
 ├── pyproject.toml
 ├── README.md
 ├── src
-│   ├── masterdata_parser_example
+│   ├── openbis_parser_example
 │       ├── __init__.py
 │       ├── parser.py
 │       └── _version.py
@@ -49,10 +49,10 @@ masterdata-parser-example
     └── test_parser.py
 ```
 
-Below you can find an explanation of each file. You can also change the name of the package from `masterdata_parser_example` to your preferred package name `<pkg-name>`.
+Below you can find an explanation of each file. You can also change the name of the package from `openbis_parser_example` to your preferred package name `<pkg-name>`.
 
 In order to create your new parser, you have to:
-1. Define a new class in `src/<pkg-name>/parser.py` instead of `MasterdataParserExample`. We recommend naming it `PkgName`.
+1. Define a new class in `src/<pkg-name>/parser.py` instead of `OpenbisParserExample`. We recommend naming it `PkgName`.
 2. Modify `src/<pkg-name>/__init__.py` entry point variables:
 ```python
 from .parser import PkgName
@@ -68,11 +68,7 @@ from .parser import PkgName
 ```sh
 <pkg-name>_entry_point = "<pkg-name>:<pkg-name>_entry_point"
 ```
-4. Modify all other parts in `pyproject.toml` where the `<pkg-name>` is `masterdata_parser_example` to your package name.
-
-### Explanation of the files
-
-_To be added!_
+4. Modify all other parts in `pyproject.toml` where the `<pkg-name>` is `openbis_parser_example` to your package name.
 
 ## 3. Work in your parser
 

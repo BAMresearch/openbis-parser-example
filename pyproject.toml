@@ -12,7 +12,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
 ]
-name = "masterdata-parser-example"
+name = "openbis-parser-example"
 description = "An example parser for openBIS using the bam-masterdata interface."
 dynamic = ["version"]
 readme = "README.md"
@@ -25,12 +25,12 @@ maintainers = [
 ]
 license = { file = "LICENSE" }
 dependencies = [
-  "bam-masterdata>=0.6.2",
+  "bam-masterdata>=0.13.0",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/BAMresearch/masterdata-parser-example"
-"Bug Tracker" = "https://github.com/BAMresearch/masterdata-parser-example/issues"
+"Homepage" = "https://github.com/BAMresearch/openbis-parser-example"
+"Bug Tracker" = "https://github.com/BAMresearch/openbis-parser-example/issues"
 
 [project.optional-dependencies]
 dev = [
@@ -43,7 +43,7 @@ dev = [
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
-include = ["src/masterdata_parser_example/*.py", "tests/*.py"]
+include = ["src/openbis_parser_example/*.py", "tests/*.py"]
 exclude = [
     ".bzr",
     ".direnv",
@@ -110,13 +110,6 @@ skip-magic-trailing-comma = false
 # Like Black, automatically detect the appropriate line ending.
 line-ending = "auto"
 
-[tool.mypy]
-strict = false
-ignore_missing_imports = true
-follow_imports = "silent"
-no_strict_optional = true
-disable_error_code = "import, annotation-unchecked"
-
 [tool.setuptools]
 package-dir = { "" = "src" }
 
@@ -124,7 +117,7 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.setuptools_scm]
-write_to = "src/masterdata_parser_example/_version.py"
+write_to = "src/openbis_parser_example/_version.py"
 
 [project.entry-points."bam.parsers"]
-masterdata_parser_example_entry_point = "masterdata_parser_example:masterdata_parser_example_entry_point"
+openbis_parser_example_entry_point = "openbis_parser_example:openbis_parser_example_entry_point"

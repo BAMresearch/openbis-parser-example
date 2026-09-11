@@ -24,33 +24,5 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports.ruff": "always",
     "source.fixAll.ruff": "always",
-  },
-  "launch": {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "parser-example Python",
-        "type": "debugpy",
-        "request": "launch",
-        "console": "integratedTerminal",
-        "justMyCode": false,
-        "program": "${workspaceFolder}/src/masterdata_parser_example/parser.py",  // path to your entry point Python module
-      },
-      {
-        "name": "parser-example tests",
-        "type": "debugpy",
-        "request": "launch",
-        "console": "integratedTerminal",
-        "program": "${workspaceFolder}/.venv/bin/pytest",  // path to your virtual environment
-        "justMyCode": false,
-        "env": {
-        "_PYTEST_RAISE": "1"
-        },
-        "args": [
-            "-sv",
-            "${workspaceFolder}/tests/test_parser.py"  // path to your testing module
-        ]
-      },
-    ]
-  },
+  }
 }
