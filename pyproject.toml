@@ -24,7 +24,7 @@ maintainers = [
 ]
 license = { file = "LICENSE" }
 dependencies = [
-  "bam-masterdata>=0.13.0",
+  "bam-masterdata>=0.15.0",
 ]
 
 [project.urls]
@@ -33,7 +33,6 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "mypy==1.0.1",
   "ruff",
   "pytest",
   "pytest-timeout",
